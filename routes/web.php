@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/my_form');
 });
 
 Auth::routes();
@@ -23,4 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/my_form', function () {
     return view('my_form');
-});
+})->middleware('auth')->name('main');
