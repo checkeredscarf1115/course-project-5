@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ClientController extends Controller
+class StudentController extends Controller
 {
     public function show(): View {
         $labels = ['ФИО', 'пол', 'дата рождения', 'место рождения', 'место жительства', 'семейное положение', 
@@ -15,9 +15,9 @@ class ClientController extends Controller
     ];
         $names = ['full_name', 'sex', 'birthdate', 'birthplace', 'residence', 'martial_status', 
         'education', 'profession', 'previous_workplace', 'previous_job_title', 'requirements', 
-        'email', 'phone_number'
+        'e_address', 'phone_number'
     ];
         $data = array($labels, $names);
-        return view('forms.client')->with('data', $data); 
+        return view('forms.student')->with('data', $data); 
     }
 }

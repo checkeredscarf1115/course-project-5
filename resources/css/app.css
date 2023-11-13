@@ -4,6 +4,7 @@ a {
 
 form .container .row {
     align-items: flex-end;
+    margin-top: 8px;
 }
 
 /* [class^=col] */
