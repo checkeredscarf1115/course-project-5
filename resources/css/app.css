@@ -1,3 +1,9 @@
 a {
     text-decoration: none;
 }
+
+form .container .row {
+    align-items: flex-end;
+}
+
+/* [class^=col] */
