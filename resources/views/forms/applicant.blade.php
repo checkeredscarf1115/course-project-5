@@ -4,16 +4,6 @@
     <form class="p-5">
         <div class="container">
             <div class="row">
-                {{-- @for ($i = 0; $i < count($data[0]); $i++)
-                    @php
-                        $label = $data[0][$i];
-                        $name = $data[1][$i];
-                    @endphp
-                    <div class="col-auto" style="">
-                        
-                    @include('forms.utils.lbl-inp')
-                </div>
-                @endfor --}}
                 <div class="container">
                     <div class="row">
                         @foreach ($data['client_searchables'] as $key => $value)
@@ -22,7 +12,7 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <button class="btn btn-primary" id="find_client">Найти</button>
+                            <button type="submit" name="search_client" class="btn btn-primary" id="search_client">{{ __('Найти') }}</button>
                         </div>
                     </div>
                     <div class="row">
@@ -37,7 +27,7 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <button class="btn btn-primary" id="find_client">Найти</button>
+                            <button type="submit" name="search_vacancy" class="btn btn-primary" id="search_vacancy">{{ __('Найти') }}</button>
                         </div>
                     </div>
                     <div class="row">
@@ -47,7 +37,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-auto">
-                            <button class="btn btn-primary" id="add_applicant">Добавить</button>
+                            <button type="submit" name="create_applicant" class="btn btn-primary" id="create_applicant">{{ __('Добавить') }}</button>
                         </div>
                     </div>
                 </div>

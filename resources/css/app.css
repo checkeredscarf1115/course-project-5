@@ -3,7 +3,7 @@ a {
 }
 
 form .container .row {
-    align-items: flex-end;
+    /* align-items: flex-end; */
     margin-top: 8px;
 }
 

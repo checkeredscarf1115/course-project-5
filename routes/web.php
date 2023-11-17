@@ -26,4 +26,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/my_form', function () {
     return view('my_form');
 })->middleware('auth')->name('main');
-
