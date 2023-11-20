@@ -14,6 +14,7 @@
               <li><a href="{{ route('form_client') }}" class="link-dark rounded">Клиент</a></li>
               <li><a href="{{ route('form_applicant') }}" class="link-dark rounded">Соискатель</a></li>
               <li><a href="{{ route('form_student') }}" class="link-dark rounded">Обучающийся</a></li>
+              <li><a href="{{ route('form_vacancy') }}" class="link-dark rounded">Вакансия</a></li>
             </ul>
           </div>
         </li>
