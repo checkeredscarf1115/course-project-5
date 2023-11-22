@@ -24,9 +24,9 @@
           </button>
           <div class="collapse show" id="search-collapse" style="">
             <ul class="">
-              <li><a href="#" class="link-dark rounded">Клиент</a></li>
-              <li><a href="#" class="link-dark rounded">Соискатель</a></li>
-              <li><a href="#" class="link-dark rounded">Обучающийся</a></li>
+              <li><a href="{{ route('search_client') }}" class="link-dark rounded">Клиент</a></li>
+              <li><a href="{{ route('search_applicant') }}" class="link-dark rounded">Соискатель</a></li>
+              <li><a href="{{ route('search_student') }}" class="link-dark rounded">Обучающийся</a></li>
             </ul>
           </div>
         </li>

@@ -1,5 +1,6 @@
 <?php
 include 'web_forms.php';
+include 'web_search.php';
 use Illuminate\Support\Facades\Route;
 // use Auth;
 

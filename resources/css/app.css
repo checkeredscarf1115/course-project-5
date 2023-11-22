@@ -7,4 +7,11 @@ form .container .row {
     margin-top: 8px;
 }
 
+h6 {
+    margin-top: 8px;
+}
 /* [class^=col] */
+
+#menu {
+    font-size: 0.8em;
+}
