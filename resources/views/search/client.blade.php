@@ -23,8 +23,8 @@
                 </div>
                 <div class="col bg-light">
                     <div class="container scrollable vh-100">           
-                            @if (isset($data['client'])) 
-                                @foreach ($data['client'] as $d)
+                            @if (isset($data['search.client'])) 
+                                @foreach ($data['search.client'] as $d)
                                     <div class="row">
                                         @php $col_count = 0 @endphp
                                         @foreach ($d->getAttributes() as $key => $value)

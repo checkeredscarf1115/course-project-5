@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Client;
 
-class ClientController extends Controller
+class ClientController extends __ModelController
 {
-    private $data;
     public function __construct() {
-        $this->data = [];
+        $this->form = 'forms.client';
+        $this->search = 'search.client';
+        $this->query = Client::query();
+
         $this->data['id'] = ['номер_клиента' => 'номер_клиента'];
         $this->data['personal_data'] = [
             'ФИО' => 'ФИО',
@@ -33,25 +35,5 @@ class ClientController extends Controller
             'адрес_электронной_почты' => 'адрес электронной почты',
             'номер_телефона' => 'номер телефона',
         ];
-    }
-
-    public function show(): View {
-        return view('forms.client')->with('data', $this->data); 
-    }
-
-    public function search(Request $request): View {
-        $query = Client::query();
-        foreach ($request->all() as $key => $value) {
-            if ($value != "") {
-                $query = $query->where($key, 'like', '%' . $value . '%');
-                
-            }
-
-            if ($key === array_key_last($request->all())) {
-                $this->data['client'] = $query->get();
-            }
-        }
-        
-        return view('search.client')->with('data', $this->data); 
     }
 }
