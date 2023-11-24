@@ -15,3 +15,7 @@ h6 {
 #menu {
     font-size: 0.8em;
 }
+
+.scrollable {
+    overflow-y: scroll;
+}

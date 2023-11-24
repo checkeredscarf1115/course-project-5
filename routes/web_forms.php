@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Forms;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 

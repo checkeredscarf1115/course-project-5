@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Search;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,10 +10,11 @@ use App\Models\Client;
 
 class ClientController extends Controller
 {
-    public function show(Request $request): View {
-        $data = [];
-        $data['id'] = ['номер_клиента' => 'номер_клиента'];
-        $data['personal_data'] = [
+    private $data;
+    public function __construct() {
+        $this->data = [];
+        $this->data['id'] = ['номер_клиента' => 'номер_клиента'];
+        $this->data['personal_data'] = [
             'ФИО' => 'ФИО',
             'пол' => 'пол',
             'дата_рождения' => 'дата рождения',
@@ -21,34 +22,36 @@ class ClientController extends Controller
             'место_жительства' => 'место жительства',
             'семейное_положение' => 'семейное положение',
         ];
-        $data['professional_background'] = [
+        $this->data['professional_background'] = [
             'образование' => 'образование',
             'профессия' => 'профессия',
             'последнее_место_работы' => 'последнее место работы',
             'последняя_должность' => 'последняя должность',
             'требования_к_работе' => 'требования к работе',
         ];
-        $data['contact'] = [
+        $this->data['contact'] = [
             'адрес_электронной_почты' => 'адрес электронной почты',
             'номер_телефона' => 'номер телефона',
         ];
+    }
 
-        // $da['client'] = (array)DB::connection('sqlsrv')->table('Клиент')->first();
+    public function show(): View {
+        return view('forms.client')->with('data', $this->data); 
+    }
 
+    public function search(Request $request): View {
         $query = Client::query();
         foreach ($request->all() as $key => $value) {
             if ($value != "") {
-                $query = $query->where($key, 'like', '%' . $value . '%')->get();
+                $query = $query->where($key, 'like', '%' . $value . '%');
+                
+            }
+
+            if ($key === array_key_last($request->all())) {
+                $this->data['client'] = $query->get();
             }
         }
-
-        if (isset($query))
-            $data['client'] = $query;
         
-        // $data['client'] = Client::find(546);
-        
-        
-        // $data = array($labels, $names);
-        return view('search.client')->with('data', $data); 
+        return view('search.client')->with('data', $this->data); 
     }
 }
