@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('требования_к_работе', 200);
             $table->string('адрес_электронной_почты', 50);
             $table->bigInteger('номер_телефона');
+            $table->unique(['место_жительства', 'адрес_электронной_почты', 'номер_телефона']);
         });
     }
 

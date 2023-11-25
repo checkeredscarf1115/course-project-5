@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
 use App\Models\Client;
 
 class ClientController extends __ModelController

@@ -12,12 +12,7 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <button type="submit" name="search_client" class="btn btn-primary" id="search_client">{{ __('Найти') }}</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input class="bg-light text-muted border border-light" type="text" id="country" value="data" readonly>
+                            <a href="{{ route('search_client') }}" target=”_blank” class="btn btn-primary" id="search_client">{{ __('Найти') }}</a>
                         </div>
                     </div>
                     <div class="row">
@@ -27,12 +22,19 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <button type="submit" name="search_vacancy" class="btn btn-primary" id="search_vacancy">{{ __('Найти') }}</button>
+                            <button class="btn btn-primary" id="search_vacancy">{{ __('Найти') }}</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <input class="bg-light text-muted border border-light" type="text" id="country" value="data" readonly>
+                    <div class="row my-4">
+                        <div class="col-auto">
+                            <div class="dropdown">
+                                <button class="dropbtn">Статус</button>
+                                <div class="dropdown-content">
+                                  <a href="#">Link 1</a>
+                                  <a href="#">Link 2</a>
+                                  <a href="#">Link 3</a>
+                                </div>
+                              </div>
                         </div>
                     </div>
                     <div class="row mt-4">
