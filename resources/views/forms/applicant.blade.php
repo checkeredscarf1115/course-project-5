@@ -1,7 +1,7 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5">
+    <form class="p-5" >
         <div class="container">
             <div class="row">
                 <div class="container">
@@ -22,23 +22,25 @@
                     </div>
                     <div class="row">
                         <div class="col-auto">
-                            <button class="btn btn-primary" id="search_vacancy">{{ __('Найти') }}</button>
+                            <a href="{{ route('search_vacancy') }}" target=”_blank” class="btn btn-primary" id="search_vacancy">{{ __('Найти') }}</a>
                         </div>
                     </div>
                     <div class="row my-4">
                         <div class="col-auto">
-                            <div class="dropdown">
-                                <button class="dropbtn">Статус</button>
-                                <div class="dropdown-content">
-                                  <a href="#">Link 1</a>
-                                  <a href="#">Link 2</a>
-                                  <a href="#">Link 3</a>
-                                </div>
-                              </div>
+                            <select class="form-select" id="status_select"></select>
+                            <script>
+                                let statusSelect = document.querySelector("#status_select");
+                                ({!! json_encode($data['status_values'], JSON_HEX_TAG) !!}).forEach((element) => {
+                                    let option = document.createElement("option");
+                                    option.value = element;
+                                    option.text = element;
+                                    statusSelect.add(option);
+                                });
+                            </script> 
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-auto">
+                        <div class="col-auto" onload="setStatus()">
                             <button type="submit" name="create_applicant" class="btn btn-primary" id="create_applicant">{{ __('Добавить') }}</button>
                         </div>
                     </div>

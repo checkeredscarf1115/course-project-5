@@ -27,5 +27,8 @@ class ApplicantController extends __ModelController
         $this->data['status'] = [
             'статус' => 'статус',
         ];
+        $this->data['status_values'] = [
+            "выслано", "принято", 'отказ',
+        ];
     }
 }
