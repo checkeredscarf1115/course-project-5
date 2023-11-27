@@ -5,24 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Controllers\__ModelController;
+use App\Models\Student;
 
-class StudentController extends Controller
+class StudentController extends __ModelController
 {
-    private $data;
     public function __construct() {
+        // $this->form = 'forms.applicant';
+        $this->form = 'forms.utils.__composite_key';
+        $this->search = 'main';
+        $this->query = Student::query();
 
-    }
-    
-    public function show(): View {
-        $labels = ['ФИО', 'пол', 'дата рождения', 'место рождения', 'место жительства', 'семейное положение', 
-        'образование', 'профессия', 'последнее место работы', 'последняя должность', 'требования к работе',
-        'адрес электронной почты', 'номер телефона'
-    ];
-        $names = ['full_name', 'sex', 'birthdate', 'birthplace', 'residence', 'martial_status', 
-        'education', 'profession', 'previous_workplace', 'previous_job_title', 'requirements', 
-        'e_address', 'phone_number'
-    ];
-        $data = array($labels, $names);
-        return view('forms.student')->with('data', $data); 
+        $this->data['searchables'] = Array (
+            0 => Array (
+                'id_клиента' => 'id клиента',
+            ),
+
+            1 => Array (
+                'id_курса' => 'id курса',
+            ),
+        );
+        $this->data['routes'] = ['search_client', 'search_course'];
+        
+        $this->data['status'] = [
+            'статус' => 'статус',
+        ];
+        $this->data['status_values'] = [
+            "принят", "учится", 'отчислен', 'завершил'
+        ];
     }
 }
