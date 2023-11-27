@@ -26,6 +26,7 @@ class __ModelController extends Controller
     }
 
     public function search(Request $request): View {
+        $this->data['search'] = [];
         if ($this->query != null) {
             foreach ($request->all() as $key => $value) {
                 if ($value != "") {

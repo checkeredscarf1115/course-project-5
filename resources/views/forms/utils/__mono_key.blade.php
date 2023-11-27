@@ -3,9 +3,13 @@
 @section('blank')
     <form class="p-5" method="POST">
         <div class="container">
-            <div class="row">
+            <div class="row row-flex" style='display: flex; flex-wrap: wrap;'>
                 @for ($i = 0; $i < count($data['block_names']); $i++)
-                    <div class="col-xl-4 col-sm-12 col-xs-12">
+                    @if (count($data['block_names']) < 3)
+                        <div class="col-xl-6 col-sm-12 col-xs-12">
+                    @else
+                        <div class="col-xl-4 col-sm-12 col-xs-12">
+                    @endif
                         <h3>{{ $data['block_names'][$i] }}</h3>
                         @foreach ($data['blocks'][$i] as $key => $value)
                             @include('forms.utils.lbl-inp')

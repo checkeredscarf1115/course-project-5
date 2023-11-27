@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\__ModelController;
@@ -13,7 +12,7 @@ class StudentController extends __ModelController
     public function __construct() {
         // $this->form = 'forms.applicant';
         $this->form = 'forms.utils.__composite_key';
-        $this->search = 'main';
+        $this->search = 'forms.utils.__search_template';
         $this->query = Student::query();
 
         $this->data['blocks'] = Array (
