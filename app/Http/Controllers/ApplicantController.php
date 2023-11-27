@@ -13,16 +13,16 @@ class ApplicantController extends __ModelController
     public function __construct() {
         // $this->form = 'forms.applicant';
         $this->form = 'forms.utils.__composite_key';
-        $this->search = 'main';
+        $this->search = 'forms.utils.__search_template';
         $this->query = Applicant::query();
 
-        $this->data['searchables'] = Array (
+        $this->data['blocks'] = Array (
             0 => Array (
-                'id_клиента' => 'id клиента',
+                'номер_клиента' => 'id клиента',
             ),
 
             1 => Array (
-                'id_вакансии' => 'id вакансии',
+                'номер_вакансии' => 'id вакансии',
             ),
         );
         $this->data['routes'] = ['search_client', 'search_vacancy'];

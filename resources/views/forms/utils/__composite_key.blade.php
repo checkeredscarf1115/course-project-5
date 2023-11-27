@@ -5,9 +5,9 @@
         <div class="container">
             <div class="row">
                 <div class="container">
-                    @for ($i = 0; $i < count($data['searchables']); $i++)
+                    @for ($i = 0; $i < count($data['blocks']); $i++)
                         <div class="row">
-                            @foreach ($data['searchables'][$i] as $key => $value)
+                            @foreach ($data['blocks'][$i] as $key => $value)
                                 @include('forms.utils.lbl-search-inp')
                             @endforeach
                         </div>
@@ -20,7 +20,7 @@
                     
                     <div class="row my-4">
                         <div class="col-auto">
-                            <select class="form-select" id="status_select"></select>
+                            <select name="{{ key($data['status']) }}" class="form-select" id="status_select"></select>
                             <script>
                                 let statusSelect = document.querySelector("#status_select");
                                 ({!! json_encode($data['status_values'], JSON_HEX_TAG) !!}).forEach((element) => {

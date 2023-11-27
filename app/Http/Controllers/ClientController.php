@@ -11,10 +11,12 @@ class ClientController extends __ModelController
 {
     public function __construct() {
         $this->form = 'forms.utils.__mono_key';
-        $this->search = 'search.client';
+        $this->search = 'forms.utils.__search_template';
         $this->query = Client::query();
 
-        $this->data['id'] = ['номер_клиента' => 'номер_клиента'];
+        $this->data['search'] = [];
+
+        $this->data['id'] = ['номер_клиента' => 'номер клиента'];
         $this->data['personal_data'] = [
             'ФИО' => 'ФИО',
             'пол' => 'пол',
@@ -62,7 +64,9 @@ class ClientController extends __ModelController
                 'номер_телефона' => 'номер телефона',
             ),
 
-            
+            // 3 => Array(
+            //     'номер_клиента' => 'номер_клиента',
+            // )
         ];
     }
 }

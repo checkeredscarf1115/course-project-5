@@ -16,13 +16,13 @@ class StudentController extends __ModelController
         $this->search = 'main';
         $this->query = Student::query();
 
-        $this->data['searchables'] = Array (
+        $this->data['blocks'] = Array (
             0 => Array (
-                'id_клиента' => 'id клиента',
+                'номер_клиента' => 'id клиента',
             ),
 
             1 => Array (
-                'id_курса' => 'id курса',
+                'номер_курса' => 'id курса',
             ),
         );
         $this->data['routes'] = ['search_client', 'search_course'];

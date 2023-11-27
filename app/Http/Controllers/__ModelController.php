@@ -34,7 +34,7 @@ class __ModelController extends Controller
                 }
 
                 if ($key === array_key_last($request->all())) {
-                    $this->data[$this->search] = $this->query->get();
+                    $this->data['search'] = $this->query->get();
                 }
             }
 
