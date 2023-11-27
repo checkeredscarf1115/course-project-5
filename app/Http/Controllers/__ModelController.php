@@ -16,8 +16,8 @@ class __ModelController extends Controller
 
     public function __construct() {
         $this->data = [];
-        $this->form = 'main';
-        $this->search = 'main';
+        $this->form = 'my_form';
+        $this->search = 'my_form';
         $this->query = null;
     }
 

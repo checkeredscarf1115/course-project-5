@@ -1,7 +1,7 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" >
+    <form class="p-5" method="POST">
         <div class="container">
             <div class="row">
                 <div class="container">

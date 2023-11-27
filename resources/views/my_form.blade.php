@@ -13,8 +13,11 @@
             <ul class="">
               <li><a href="{{ route('form_client') }}" class="link-dark rounded">Клиент</a></li>
               <li><a href="{{ route('form_applicant') }}" class="link-dark rounded">Соискатель</a></li>
-              <li><a href="{{ route('form_student') }}" class="link-dark rounded">Обучающийся</a></li>
               <li><a href="{{ route('form_vacancy') }}" class="link-dark rounded">Вакансия</a></li>
+              <li><a href="{{ route('form_company') }}" class="link-dark rounded">Компания</a></li>
+              <li><a href="{{ route('form_student') }}" class="link-dark rounded">Обучающийся</a></li>
+              <li><a href="{{ route('form_course') }}" class="link-dark rounded">Курс</a></li>
+              <li><a href="{{ route('form_institution') }}" class="link-dark rounded">Институт</a></li>
             </ul>
           </div>
         </li>
@@ -26,7 +29,11 @@
             <ul class="">
               <li><a href="{{ route('search_client') }}" class="link-dark rounded">Клиент</a></li>
               <li><a href="{{ route('search_applicant') }}" class="link-dark rounded">Соискатель</a></li>
+              <li><a href="{{ route('search_vacancy') }}" class="link-dark rounded">Вакансия</a></li>
+              <li><a href="{{ route('search_company') }}" class="link-dark rounded">Компания</a></li>
               <li><a href="{{ route('search_student') }}" class="link-dark rounded">Обучающийся</a></li>
+              <li><a href="{{ route('search_course') }}" class="link-dark rounded">Курс</a></li>
+              <li><a href="{{ route('search_institution') }}" class="link-dark rounded">Институт</a></li>
             </ul>
           </div>
         </li>

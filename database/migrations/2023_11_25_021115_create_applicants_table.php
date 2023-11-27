@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('номер_вакансии');
             $table->id('номер_клиента');
             $table->string('статус_предложения', 8);
+            $table->foreign('номер_вакансии')->references('номер_вакансии')->on('Вакансия');
+            $table->foreign('номер_клиента')->references('номер_клиента')->on('Клиент');
         });
     }
 
