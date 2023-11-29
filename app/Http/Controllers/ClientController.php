@@ -48,4 +48,9 @@ class ClientController extends __ModelController
             // )
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Client;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

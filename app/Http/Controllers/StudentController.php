@@ -33,4 +33,9 @@ class StudentController extends __ModelController
             "принят", "учится", 'отчислен', 'завершил'
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Student;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

@@ -33,4 +33,9 @@ class CompanyController extends __ModelController
             ),
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Company;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

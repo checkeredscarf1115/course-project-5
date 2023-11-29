@@ -1,7 +1,15 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" method="POST">
+    <form class="p-5" method="POST" action="{{ route('insert_client') }}">
+        @csrf
+
+        @if(session()->has('message'))
+            <div class="alert {{ session()->get('class') }}">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
         <div class="container">
             <div class="row row-flex" style='display: flex; flex-wrap: wrap;'>
                 @for ($i = 0; $i < count($data['block_names']); $i++)

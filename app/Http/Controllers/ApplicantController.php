@@ -33,4 +33,9 @@ class ApplicantController extends __ModelController
             "выслано", "принято", 'отказ',
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Applicant;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

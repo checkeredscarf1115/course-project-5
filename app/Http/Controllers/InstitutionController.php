@@ -32,4 +32,9 @@ class InstitutionController extends __ModelController
             ),
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Institution;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

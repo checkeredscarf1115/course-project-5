@@ -38,4 +38,9 @@ class VacancyController extends __ModelController
             ),
         ];
     }
+
+    public function insert(Request $request) {
+        $model = new Vacancy;
+        return __ModelController::insertWithModel($model, $request);
+    }
 }

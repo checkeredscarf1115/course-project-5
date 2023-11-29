@@ -1,7 +1,15 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" method="POST">
+    <form class="p-5" method="POST" action="{{ route('insert_client') }}">
+        @csrf
+
+        @if(session()->has('message'))
+            <div class="alert {{ session()->get('class') }}">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        
         <div class="container">
             <div class="row">
                 <div class="container">
@@ -33,8 +41,8 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-auto" onload="setStatus()">
-                            <button type="submit" name="create_applicant" class="btn btn-primary" id="create_applicant">{{ __('Добавить') }}</button>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary" id="create">{{ __('Создать') }}</button>
                         </div>
                     </div>
                 </div>
