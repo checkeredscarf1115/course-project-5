@@ -13,6 +13,7 @@ class InstitutionController extends __ModelController
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Institution::query();
+        $this->route_insert = 'insert_institution';
 
         $this->data['id'] = ['номер_ОУ' => 'номер образовательного учреждения'];
 

@@ -14,6 +14,7 @@ class ApplicantController extends __ModelController
         $this->form = 'forms.utils.__composite_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Applicant::query();
+        $this->route_insert = 'insert_applicant';
 
         $this->data['blocks'] = Array (
             0 => Array (

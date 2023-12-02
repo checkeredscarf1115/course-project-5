@@ -14,6 +14,7 @@ class StudentController extends __ModelController
         $this->form = 'forms.utils.__composite_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Student::query();
+        $this->route_insert = 'insert_student';
 
         $this->data['blocks'] = Array (
             0 => Array (

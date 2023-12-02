@@ -13,6 +13,7 @@ class ClientController extends __ModelController
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Client::query();
+        $this->route_insert = 'insert_client';
 
         $this->data['id'] = ['номер_клиента' => 'номер клиента'];
 

@@ -14,4 +14,6 @@ class Institution extends Model
 
     protected $table = 'Образовательное_учреждение';
     protected $primaryKey = 'номер_ОУ';
+
+    protected $fillable = ['номер_оу', 'название_оу', 'адрес_оу', 'адрес_электронной_почты_оу', 'телефон_оу'];
 }

@@ -13,6 +13,7 @@ class CourseController extends __ModelController
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Course::query();
+        $this->route_insert = 'insert_course';
 
         $this->data['id'] = ['номер_курса' => 'номер курса'];
 

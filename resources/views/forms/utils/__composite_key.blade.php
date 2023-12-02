@@ -1,7 +1,7 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" method="POST" action="{{ route('insert_client') }}">
+    <form class="p-5" method="POST" action="{{ route($route_insert) }}">
         @csrf
 
         @if(session()->has('message'))
@@ -28,9 +28,11 @@
                     
                     <div class="row my-4">
                         <div class="col-auto">
-                            <select name="{{ key($data['status']) }}" class="form-select" id="status_select"></select>
+                            <select name="{{ key($data['status']) }}" class="form-select" id="{{ key($data['status']) }}"></select>
                             <script>
-                                let statusSelect = document.querySelector("#status_select");
+                                let tag = ({!! json_encode($data['status']) !!});
+                                let fulltag = '#' + Object.keys(tag)[0];
+                                let statusSelect = document.querySelector(fulltag);
                                 ({!! json_encode($data['status_values'], JSON_HEX_TAG) !!}).forEach((element) => {
                                     let option = document.createElement("option");
                                     option.value = element;
@@ -42,7 +44,9 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-primary" id="create">{{ __('Создать') }}</button>
+                            <button type="submit" class="btn btn-primary" id="post">{{ __('Создать') }}</button>
+                            {{-- <button type="submit" formmethod="put" class="btn btn-primary" id="put">{{ __('Изменить') }}</button>
+                            <button type="submit" formmethod="delete" class="btn btn-primary" id="delete">{{ __('Удалить') }}</button> --}}
                         </div>
                     </div>
                 </div>

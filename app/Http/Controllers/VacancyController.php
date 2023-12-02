@@ -13,7 +13,7 @@ class VacancyController extends __ModelController
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Vacancy::query();
-
+        $this->route_insert = 'insert_vacancy';
 
 
         $this->data['id'] = ['номер_вакансии' => 'номер вакансии'];

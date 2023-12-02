@@ -14,4 +14,7 @@ class Vacancy extends Model
 
     protected $table = 'Вакансия';
     protected $primaryKey = 'номер_вакансии';
+
+    protected $fillable = ['номер_вакансии', 'ИНН_компании', 'должность', 'обязанности', 'требования', 'условия', 
+    'дата_создания', 'дата_закрытия'];
 }

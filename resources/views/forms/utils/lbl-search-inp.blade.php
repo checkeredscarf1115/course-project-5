@@ -8,6 +8,6 @@
 <div class="col-auto" style="min-width: 200px">
     <label class="mt-2" for="{{ $key }}">{{ $value }}</label>
     <br>
-    <input class="" type="text" id="{{ $key }}">
+    <input class="" type="text" name="{{ $key }}" id="{{ $key }}">
     <br>
 </div>

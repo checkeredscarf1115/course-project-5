@@ -13,6 +13,7 @@ class CompanyController extends __ModelController
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
         $this->query = Company::query();
+        $this->route_insert = 'insert_company';
 
         $this->data['id'] = ['ИНН_компании' => 'ИНН компании'];
 

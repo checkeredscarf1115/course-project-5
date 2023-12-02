@@ -1,7 +1,7 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" method="POST" action="{{ route('insert_client') }}">
+    <form class="p-5" method="POST" action="{{ route($route_insert) }}">
         @csrf
 
         @if(session()->has('message'))
@@ -25,11 +25,22 @@
                     </div>
                 @endfor
             </div>
+
             <div class="row mt-4">
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">{{ __('Создать') }}</button>
+                    <button type="submit" class="btn btn-primary" id="post">{{ __('Создать') }}</button>
                 </div>
             </div>
+
+            {{-- <div class="row mt-4">
+                <div class="col-auto">
+                    @include('forms.utils.lbl-inp', ['key' => array_keys($data['id'])[0], 'value' => array_values($data['id'])[0]])
+                    <div class="mt-3"></div>
+                    <button type="submit" formmethod="put" class="btn btn-primary" id="put">{{ __('Изменить') }}</button>
+                    <button type="submit" formmethod="delete" class="btn btn-primary" id="delete">{{ __('Удалить') }}</button>
+                </div>
+            </div> --}}
+
         </div>
     </form>
 @endsection
