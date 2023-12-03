@@ -37,6 +37,6 @@ class ApplicantController extends __ModelController
 
     public function insert(Request $request) {
         $model = new Applicant;
-        return __ModelController::insertWithModel($model, $request);
+        return __ModelController::changeRecordState($model, $request);
     }
 }

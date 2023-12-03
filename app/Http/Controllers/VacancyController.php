@@ -41,6 +41,6 @@ class VacancyController extends __ModelController
 
     public function insert(Request $request) {
         $model = new Vacancy;
-        return __ModelController::insertWithModel($model, $request);
+        return __ModelController::changeRecordState($model, $request);
     }
 }

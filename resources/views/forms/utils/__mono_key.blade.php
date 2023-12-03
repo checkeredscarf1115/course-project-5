@@ -1,7 +1,7 @@
 @extends('my_form')
 
 @section('blank')
-    <form class="p-5" method="POST" action="{{ route($route_insert) }}">
+    <form class="p-5" method="POST" >
         @csrf
 
         @if(session()->has('message'))
@@ -28,18 +28,18 @@
 
             <div class="row mt-4">
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary" id="post">{{ __('Создать') }}</button>
+                    <button type="submit" formaction="{{ route($data['route_insert']) }}" class="btn btn-primary" name="submit" value="insert">{{ __('Создать') }}</button>
                 </div>
             </div>
 
-            {{-- <div class="row mt-4">
+            <div class="row mt-4">
                 <div class="col-auto">
                     @include('forms.utils.lbl-inp', ['key' => array_keys($data['id'])[0], 'value' => array_values($data['id'])[0]])
                     <div class="mt-3"></div>
-                    <button type="submit" formmethod="put" class="btn btn-primary" id="put">{{ __('Изменить') }}</button>
-                    <button type="submit" formmethod="delete" class="btn btn-primary" id="delete">{{ __('Удалить') }}</button>
+                    <button type="submit" formaction="{{ route($data['route_insert']) }}" class="btn btn-primary" name="submit" value="update">{{ __('Изменить') }}</button>
+                    <button type="submit" formaction="{{ route($data['route_insert']) }}" class="btn btn-primary" name="submit" value="delete">{{ __('Удалить') }}</button>
                 </div>
-            </div> --}}
+            </div>
 
         </div>
     </form>
