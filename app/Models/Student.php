@@ -14,7 +14,8 @@ class Student extends Model
 
     protected $table = 'Обучающийся_на_курсах';
     // protected $primaryKey = ['номер_клиента', 'номер_курса'];
-    protected $primaryKey = 'номер_клиента';
+    // protected $primaryKey = 'номер_клиента';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['номер_курса', 'номер_клиента', 'статус'];
 }

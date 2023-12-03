@@ -14,7 +14,8 @@ class Applicant extends Model
 
     protected $table = 'Предложение';
     // protected $primaryKey = ['номер_клиента', 'номер_вакансии'];
-    protected $primaryKey = 'номер_клиента';
+    // protected $primaryKey = 'номер_клиента';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['номер_клиента', 'номер_вакансии', 'статус_предложения'];
 }

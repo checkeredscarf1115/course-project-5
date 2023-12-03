@@ -67,10 +67,10 @@ class __ModelController extends Controller
             return $this->insertWithModel($model, $request);
         }
         else if ($request->submit == "update") {
-            return $this->updateWithModel($model, $request);
+            return $this->update($request);
         }
         else if ($request->submit == "delete") {
-            // return $this->insertWithModel($model, $request);
+            return $this->delete($request);
         }
         
         return $this->getMessage("Found nothing", "alert-danger");
@@ -103,7 +103,7 @@ class __ModelController extends Controller
         return $this->getMessage("Запись успешно добавлена", "alert-success");
     }
 
-    public function updateWithModel($model, Request $request) {
+    public function update(Request $request) {
         $arr = [];
         foreach ($request->all() as $key => $value) {
             if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
@@ -147,6 +147,53 @@ class __ModelController extends Controller
 
         try {
             $m->save();
+        } catch (QueryException $ex) {
+            return $this->getMessage("Ошибка при изменении записи", "alert-danger");
+            // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
+            // return $this->getMessage($ex->getMessage(), "alert-danger");  
+        }
+
+        // return $this->getMessage(implode('\n', $m->toArray()), "alert-success");
+        return $this->getMessage("Запись успешно изменена", "alert-success");
+    }
+
+    public function delete(Request $request) {
+        $arr = [];
+        foreach ($request->all() as $key => $value) {
+            if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
+                if ($value == "") {
+                    return $this->getMessage("Необходимо заполнить поле с идентификатором", "alert-warning");
+                }
+                else {
+                    $arr[$key] = $value;
+                }
+            }
+            else if (!array_key_exists('id', $this->data)) {
+                if (array_key_exists($key, $this->data['blocks'][0]) || array_key_exists($key, $this->data['blocks'][1])) {
+                    if ($value == "" && !(array_key_exists($key, $this->data['status']))) {
+                        return $this->getMessage("Необходимо заполнить поле с идентификаторами", "alert-warning");
+                    }
+                    else {
+                        $arr[$key] = $value;
+                    }
+                }
+            }
+        }
+
+        $m = $this->query;
+        if ($m != null) {
+            foreach ($arr as $key => $value) {
+                $m = $m->where($key, 'like', '%' . $value . '%');
+            }
+        }
+
+        $m = $m->first();
+        if ($m === null) {
+            return $this->getMessage("Не существует такой записи", "alert-warning");
+        }
+
+        try {
+            $m->delete();
         } catch (QueryException $ex) {
             return $this->getMessage("Ошибка при изменении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
