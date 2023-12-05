@@ -38,7 +38,13 @@
                 </div>
                 
                 <div class="col bg-light">
-                    <div class="container scrollable vh-100">           
+                    <div class="container scrollable vh-100">     
+                            @if(isset($data['search_error'])) 
+                                <div class="alert alert-danger">
+                                    {{ $data['search_error'] }}
+                                </div>
+                            @endif
+
                             @if (isset($data['search'])) 
                                 @foreach ($data['search'] as $d)
                                     <div class="row">

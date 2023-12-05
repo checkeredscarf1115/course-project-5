@@ -1,6 +1,8 @@
 <?php
 include 'web_resources.php';
+include 'auth.php';
 use Illuminate\Support\Facades\Route;
+
 // use Auth;
 
 /*
@@ -18,8 +20,6 @@ Route::get('/', function () {
     // return view('welcome');
     return redirect('/my_form');
 });
-
-Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', function () {

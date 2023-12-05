@@ -8,13 +8,14 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 
 class __ModelController extends Controller
 {
     protected $data;
     protected $form;
     protected $search;
-    protected $query;
     protected $route_insert;
     protected $route_update;
     protected $route_delete;
@@ -23,10 +24,28 @@ class __ModelController extends Controller
         $this->data = [];
         $this->form = 'main';
         $this->search = 'main';
-        $this->query = null;
         $this->route_insert = 'main';
         $this->route_update = 'main';
         $this->route_delete = 'main';
+    }
+
+    public function setConnection($model) {
+        DB::purge('sqlsrv');
+
+        config(['database.connections.sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_DATABASE_SQLSRV', 'forge'),
+            'username' => Auth::user()->email,
+            'password' => Auth::user()->name,
+        ]]);
+
+        // DB::connection('sqlsrv');
+        // DB::reconnect('sqlsrv');
+        $model->setConnection('sqlsrv');
+        return $model;
     }
 
     public function show(): View {
@@ -37,17 +56,24 @@ class __ModelController extends Controller
         return view($this->form)->with('data', $this->data);
     }
 
-    public function search(Request $request): View {
+    public function searchWithQuery($model, Request $request) {
+        $model = __ModelController::setConnection($model);
+        $query = $model->query();
+
         $this->data['search'] = [];
-        if ($this->query != null) {
+        if ($query != null) {
             foreach ($request->all() as $key => $value) {
                 if ($value != "") {
-                    $this->query = $this->query->where($key, 'like', '%' . $value . '%');
-                    
+                    $query = $query->where($key, 'like', '%' . $value . '%');
                 }
 
-                if ($key === array_key_last($request->all())) {
-                    $this->data['search'] = $this->query->get();
+                try {
+                    if ($key === array_key_last($request->all())) {
+                        $this->data['search'] = $query->get();
+                    }
+                } catch (QueryException $ex) {
+                    $this->data['search_error'] = $ex->getMessage();
+                    return view($this->search)->with('data', $this->data); 
                 }
             }
 
@@ -63,14 +89,16 @@ class __ModelController extends Controller
     }
 
     public function changeRecordState($model, Request $request) {
+        $model = __ModelController::setConnection($model);
+
         if ($request->submit == "insert") {
             return $this->insertWithModel($model, $request);
         }
         else if ($request->submit == "update") {
-            return $this->update($request);
+            return $this->update($model->query(), $request);
         }
         else if ($request->submit == "delete") {
-            return $this->delete($request);
+            return $this->delete($model->query(), $request);
         }
         
         return $this->getMessage("Found nothing", "alert-danger");
@@ -85,25 +113,26 @@ class __ModelController extends Controller
             }
         }
 
-        $arr = [];
+        // $arr = [];
         foreach ($request->except(['_token', 'submit']) as $key => $value) {
             // $arr[$key] = $value;
             $model->$key = $value;
-            $arr[$key] = $model->$key;
+            // $arr[$key] = $model->$key;
         }
         // $model->fill($arr);
 
         try {
             $model->save();
         } catch (QueryException $ex) {
-            return $this->getMessage("Ошибка при добавлении записи", "alert-danger");
+            // return $this->getMessage("Ошибка при добавлении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $arr), "alert-danger");
+            return $this->getMessage($ex->getMessage(), "alert-danger"); 
         }
 
         return $this->getMessage("Запись успешно добавлена", "alert-success");
     }
 
-    public function update(Request $request) {
+    public function update($query, Request $request) {
         $arr = [];
         foreach ($request->all() as $key => $value) {
             if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
@@ -126,7 +155,7 @@ class __ModelController extends Controller
             }
         }
 
-        $m = $this->query;
+        $m = $query;
         if ($m != null) {
             foreach ($arr as $key => $value) {
                 $m = $m->where($key, 'like', '%' . $value . '%');
@@ -148,16 +177,16 @@ class __ModelController extends Controller
         try {
             $m->save();
         } catch (QueryException $ex) {
-            return $this->getMessage("Ошибка при изменении записи", "alert-danger");
+            // return $this->getMessage("Ошибка при изменении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
-            // return $this->getMessage($ex->getMessage(), "alert-danger");  
+            return $this->getMessage($ex->getMessage(), "alert-danger");  
         }
 
         // return $this->getMessage(implode('\n', $m->toArray()), "alert-success");
         return $this->getMessage("Запись успешно изменена", "alert-success");
     }
 
-    public function delete(Request $request) {
+    public function delete($query, Request $request) {
         $arr = [];
         foreach ($request->all() as $key => $value) {
             if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
@@ -180,7 +209,7 @@ class __ModelController extends Controller
             }
         }
 
-        $m = $this->query;
+        $m = $query;
         if ($m != null) {
             foreach ($arr as $key => $value) {
                 $m = $m->where($key, 'like', '%' . $value . '%');
@@ -195,9 +224,9 @@ class __ModelController extends Controller
         try {
             $m->delete();
         } catch (QueryException $ex) {
-            return $this->getMessage("Ошибка при изменении записи", "alert-danger");
+            // return $this->getMessage("Ошибка при изменении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
-            // return $this->getMessage($ex->getMessage(), "alert-danger");  
+            return $this->getMessage($ex->getMessage(), "alert-danger");  
         }
 
         // return $this->getMessage(implode('\n', $m->toArray()), "alert-success");

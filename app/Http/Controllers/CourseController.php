@@ -12,7 +12,6 @@ class CourseController extends __ModelController
     public function __construct() {
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
-        $this->query = Course::query();
         $this->route_insert = 'insert_course';
 
         $this->data['id'] = ['номер_курса' => 'номер курса'];
@@ -41,5 +40,10 @@ class CourseController extends __ModelController
     public function insert(Request $request) {
         $model = new Course;
         return __ModelController::changeRecordState($model, $request);
+    }
+
+    public function search(Request $request) {
+        $model = new Course;
+        return __ModelController::searchWithQuery($model, $request);
     }
 }

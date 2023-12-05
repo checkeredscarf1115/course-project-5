@@ -13,7 +13,6 @@ class ApplicantController extends __ModelController
         // $this->form = 'forms.applicant';
         $this->form = 'forms.utils.__composite_key';
         $this->search = 'forms.utils.__search_template';
-        $this->query = Applicant::query();
         $this->route_insert = 'insert_applicant';
 
         $this->data['blocks'] = Array (
@@ -38,5 +37,10 @@ class ApplicantController extends __ModelController
     public function insert(Request $request) {
         $model = new Applicant;
         return __ModelController::changeRecordState($model, $request);
+    }
+
+    public function search(Request $request) {
+        $model = new Applicant;
+        return __ModelController::searchWithQuery($model, $request);
     }
 }

@@ -12,7 +12,6 @@ class VacancyController extends __ModelController
     public function __construct() {
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
-        $this->query = Vacancy::query();
         $this->route_insert = 'insert_vacancy';
 
 
@@ -42,5 +41,10 @@ class VacancyController extends __ModelController
     public function insert(Request $request) {
         $model = new Vacancy;
         return __ModelController::changeRecordState($model, $request);
+    }
+
+    public function search(Request $request) {
+        $model = new Vacancy;
+        return __ModelController::searchWithQuery($model, $request);
     }
 }

@@ -13,7 +13,6 @@ class StudentController extends __ModelController
         // $this->form = 'forms.applicant';
         $this->form = 'forms.utils.__composite_key';
         $this->search = 'forms.utils.__search_template';
-        $this->query = Student::query();
         $this->route_insert = 'insert_student';
 
         $this->data['blocks'] = Array (
@@ -38,5 +37,10 @@ class StudentController extends __ModelController
     public function insert(Request $request) {
         $model = new Student;
         return __ModelController::changeRecordState($model, $request);
+    }
+
+    public function search(Request $request) {
+        $model = new Student;
+        return __ModelController::searchWithQuery($model, $request);
     }
 }

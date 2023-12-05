@@ -12,7 +12,6 @@ class ClientController extends __ModelController
     public function __construct() {
         $this->form = 'forms.utils.__mono_key';
         $this->search = 'forms.utils.__search_template';
-        $this->query = Client::query();
         $this->route_insert = 'insert_client';
 
         $this->data['id'] = ['номер_клиента' => 'номер клиента'];
@@ -52,6 +51,13 @@ class ClientController extends __ModelController
 
     public function insert(Request $request) {
         $model = new Client;
+        // $model = __ModelController::setConnection($model);
         return __ModelController::changeRecordState($model, $request);
+    }
+
+    public function search(Request $request) {
+        $model = new Client;
+        // $model = __ModelController::setConnection($model);
+        return __ModelController::searchWithQuery($model, $request);
     }
 }
