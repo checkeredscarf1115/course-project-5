@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ViewStudent extends Model
+{
+    use HasFactory;
+
+    public $timestamps = false;
+    protected $connection = 'sqlsrv';
+
+    protected $table = 'Обучающийся_на_курсах_';
+    // protected $primaryKey = ['номер_клиента', 'номер_курса'];
+    // protected $primaryKey = 'номер_клиента';
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['номер_курса', 'номер_клиента', 'статус'];
+}

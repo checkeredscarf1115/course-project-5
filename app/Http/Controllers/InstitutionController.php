@@ -6,6 +6,7 @@ use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Institution;
+use App\Models\ViewInstitution;
 
 class InstitutionController extends __ModelController
 {
@@ -39,7 +40,7 @@ class InstitutionController extends __ModelController
     }
 
     public function search(Request $request) {
-        $model = new Institution;
+        $model = new ViewInstitution;
         return __ModelController::searchWithQuery($model, $request);
     }
 }

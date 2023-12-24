@@ -6,6 +6,7 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Closure;
+use App\Http\Controllers\Auth\RegisterController;
 
 class Admin extends Middleware
 {
@@ -20,7 +21,7 @@ class Admin extends Middleware
         
         // return abort(404);
 
-        if (Auth::user() && preg_match('/admin.\w+/', Auth::user()->email)) {
+        if (Auth::user()->role == 'admin') {
             return $next($request);
         }
 

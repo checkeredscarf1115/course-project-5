@@ -62,17 +62,18 @@ class __ModelController extends Controller
 
         $this->data['search'] = [];
         if ($query != null) {
-            foreach ($request->all() as $key => $value) {
-                if ($value != "") {
+            foreach ($request->except(['_token', 'submit']) as $key => $value) {
+                if ($value != "" && $key != 'page') {
                     $query = $query->where($key, 'like', '%' . $value . '%');
                 }
 
                 try {
                     if ($key === array_key_last($request->all())) {
-                        $this->data['search'] = $query->get();
+                        $this->data['search'] = $query->paginate(100);
                     }
                 } catch (QueryException $ex) {
                     $this->data['search_error'] = $ex->getMessage();
+                    // $this->data['search_error'] =  $this->getErrorMessage($ex->getCode()); 
                     return view($this->search)->with('data', $this->data); 
                 }
             }
@@ -85,6 +86,7 @@ class __ModelController extends Controller
     public function getMessage($message, $class) {
         return redirect()->back()->with('message',"$message")
                                  ->with('class',"$class")
+                                 ->withInput()
                                  ;
     }
 
@@ -115,9 +117,14 @@ class __ModelController extends Controller
 
         // $arr = [];
         foreach ($request->except(['_token', 'submit']) as $key => $value) {
+            if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
+                
+            }
+            else {
             // $arr[$key] = $value;
             $model->$key = $value;
             // $arr[$key] = $model->$key;
+            }
         }
         // $model->fill($arr);
 
@@ -126,7 +133,11 @@ class __ModelController extends Controller
         } catch (QueryException $ex) {
             // return $this->getMessage("Ошибка при добавлении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $arr), "alert-danger");
-            return $this->getMessage($ex->getMessage(), "alert-danger"); 
+            $msg = strstr($ex->getMessage(), '[SQL Server]');
+            $msg = substr($msg, 12, strpos($msg, "(Connection"));
+            $msg = strstr($msg, '(Connection', true);
+            return $this->getMessage($msg, "alert-danger"); 
+            // return $this->getMessage($this->getErrorMessage($ex->getCode()), "alert-danger"); 
         }
 
         return $this->getMessage("Запись успешно добавлена", "alert-success");
@@ -155,6 +166,7 @@ class __ModelController extends Controller
             }
         }
 
+        try {
         $m = $query;
         if ($m != null) {
             foreach ($arr as $key => $value) {
@@ -174,12 +186,15 @@ class __ModelController extends Controller
             
         }
 
-        try {
             $m->save();
         } catch (QueryException $ex) {
             // return $this->getMessage("Ошибка при изменении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
-            return $this->getMessage($ex->getMessage(), "alert-danger");  
+            $msg = strstr($ex->getMessage(), '[SQL Server]');
+            $msg = substr($msg, 12, strpos($msg, "(Connection"));
+            $msg = strstr($msg, '(Connection', true);
+            return $this->getMessage($msg, "alert-danger");  
+            // return $this->getMessage($this->getErrorMessage($ex->getCode()), "alert-danger"); 
         }
 
         // return $this->getMessage(implode('\n', $m->toArray()), "alert-success");
@@ -209,6 +224,7 @@ class __ModelController extends Controller
             }
         }
 
+        try {
         $m = $query;
         if ($m != null) {
             foreach ($arr as $key => $value) {
@@ -221,15 +237,34 @@ class __ModelController extends Controller
             return $this->getMessage("Не существует такой записи", "alert-warning");
         }
 
-        try {
+        
             $m->delete();
         } catch (QueryException $ex) {
             // return $this->getMessage("Ошибка при изменении записи", "alert-danger");
             // return $this->getMessage(implode('\n', $m->toArray()), "alert-danger");  
-            return $this->getMessage($ex->getMessage(), "alert-danger");  
+            $msg = strstr($ex->getMessage(), '[SQL Server]');
+            $msg = substr($msg, 12, strpos($msg, "(Connection"));
+            $msg = strstr($msg, '(Connection', true);
+            return $this->getMessage($msg, "alert-danger");  
+            // return $this->getMessage($this->getErrorMessage($ex->getCode()), "alert-danger"); 
         }
 
         // return $this->getMessage(implode('\n', $m->toArray()), "alert-success");
-        return $this->getMessage("Запись успешно изменена", "alert-success");
+        return $this->getMessage("Запись успешно удалена", "alert-success");
+    }
+
+    private function getErrorMessage($error_code) {
+        switch ($error_code) {
+            case 28000:
+                return "This user's role is undefined";
+            case 42000:
+                return "This user does not have enough rights to perform this action";
+            case 100001:
+                return "Вакансия этой компании уже открыта";
+            case 100011:
+                return "Курс этого образовательного учреждения уже открыт";
+            default:
+                return "error";
+        }
     }
 }

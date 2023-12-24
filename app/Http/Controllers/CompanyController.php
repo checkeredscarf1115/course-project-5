@@ -6,6 +6,7 @@ use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Company;
+use App\Models\ViewCompany;
 
 class CompanyController extends __ModelController
 {
@@ -40,7 +41,7 @@ class CompanyController extends __ModelController
     }
 
     public function search(Request $request) {
-        $model = new Company;
+        $model = new ViewCompany;
         return __ModelController::searchWithQuery($model, $request);
     }
 }

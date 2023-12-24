@@ -6,6 +6,7 @@ use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Course;
+use App\Models\ViewCourse;
 
 class CourseController extends __ModelController
 {
@@ -38,12 +39,21 @@ class CourseController extends __ModelController
     }
 
     public function insert(Request $request) {
+        $currentDate = date('Y-m-d');
+        if ($request->дата_начала_обучения < $currentDate) {
+            return __ModelController::getMessage("Дата начала обучения не может быть ниже текущей", "alert-danger");
+        }
+        
+        if ($request->дата_окончания_обучения <= $request->дата_начала_обучения) {
+            return __ModelController::getMessage("Дата окончания обучения не может быть равна или ниже даты начала обучения", "alert-danger");
+        }
+
         $model = new Course;
         return __ModelController::changeRecordState($model, $request);
     }
 
     public function search(Request $request) {
-        $model = new Course;
+        $model = new ViewCourse;
         return __ModelController::searchWithQuery($model, $request);
     }
 }

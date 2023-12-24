@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\__ModelController;
 use App\Models\Applicant;
+use App\Models\ViewApplicant;
 
 class ApplicantController extends __ModelController
 {
@@ -40,7 +41,7 @@ class ApplicantController extends __ModelController
     }
 
     public function search(Request $request) {
-        $model = new Applicant;
+        $model = new ViewApplicant;
         return __ModelController::searchWithQuery($model, $request);
     }
 }

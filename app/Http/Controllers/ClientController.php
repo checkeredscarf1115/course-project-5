@@ -6,6 +6,7 @@ use App\Http\Controllers\__ModelController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Client;
+use App\Models\ViewClient;
 
 class ClientController extends __ModelController
 {
@@ -56,7 +57,7 @@ class ClientController extends __ModelController
     }
 
     public function search(Request $request) {
-        $model = new Client;
+        $model = new ViewClient;
         // $model = __ModelController::setConnection($model);
         return __ModelController::searchWithQuery($model, $request);
     }

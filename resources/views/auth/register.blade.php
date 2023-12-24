@@ -61,6 +61,19 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="role" name="role" class="form-select" required autocomplete="role">
+                                    <option value=""></option>
+                                    <option value="clientservant">clientservant</option>
+                                    <option value="orgservant">orgservant</option>
+                                    <option value="admin">admin</option></select>
+                                {{-- <input id="role" type="text" class="form-control" name="role" required autocomplete="role"> --}}
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

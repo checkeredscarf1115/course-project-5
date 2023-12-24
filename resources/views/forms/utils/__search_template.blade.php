@@ -4,16 +4,16 @@
     <form class="" method='get'>
         <div class="container">
             <div class="row">
-                <div class="col-2 vh-100" id='menu'>
+                <div class="col-2 " id='menu'>
                     @if (isset($data['id'])) 
                         @foreach ($data['id'] as $key => $value)
-                            @include('forms.utils.lbl-inp')
+                            @include('forms.utils.lbl-search-inp')
                         @endforeach
                     @endif
 
                     @foreach ($data['blocks'] as $item)
                         @foreach ($item as $key => $value)
-                            @include('forms.utils.lbl-inp')
+                            @include('forms.utils.lbl-search-inp')
                         @endforeach 
                     @endforeach
 
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 
-                <div class="col bg-light">
-                    <div class="container scrollable vh-100">     
+                <div class="col-10 bg-light">
+                    <div class="container scrollable " style="max-height: 130vh">     
                             @if(isset($data['search_error'])) 
                                 <div class="alert alert-danger">
                                     {{ $data['search_error'] }}
@@ -65,10 +65,20 @@
                                         @endforeach
                                     </div>
                                 @endforeach
+                                
                             @endif
                     </div>
+                    
                 </div>
+                
             </div>
+
+            @if (isset($data['search']) && $data['search'] != []) 
+                <div class="row mt-2">
+                    {{ $data['search']->appends(request()->all())->links('pagination::bootstrap-5') }}
+                </div>
+            @endif
         </div>
+                
     </form>
 @endsection

@@ -33,10 +33,23 @@
               <li><a href="{{ route('search_company') }}" class="link-dark rounded">Компания</a></li>
               <li><a href="{{ route('search_student') }}" class="link-dark rounded">Обучающийся</a></li>
               <li><a href="{{ route('search_course') }}" class="link-dark rounded">Курс</a></li>
-              <li><a href="{{ route('search_institution') }}" class="link-dark rounded">Институт</a></li>
+              <li><a href="{{ route('search_institution') }}" class="link-dark rounded">Институт</a></li> 
             </ul>
           </div>
         </li>
+
+        @can('Admin')
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#search-collapse" aria-expanded="false">
+              <x-fas-greater-than style="height: 12px"/> Прочее
+          </button>
+          <div class="collapse show" id="search-collapse" style="">
+            <ul class="">
+              <li><a href="{{ route('register') }}" class="link-dark rounded">Регистрация</a></li>
+            </ul>
+          </div>
+        </li>
+        @endcan
         
       </ul>
     </div>

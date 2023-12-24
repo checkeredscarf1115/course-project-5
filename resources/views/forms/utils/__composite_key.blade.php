@@ -16,7 +16,7 @@
                     @for ($i = 0; $i < count($data['blocks']); $i++)
                         <div class="row">
                             @foreach ($data['blocks'][$i] as $key => $value)
-                                @include('forms.utils.lbl-search-inp')
+                                @include('forms.utils.lbl-inp')
                             @endforeach
                         </div>
                         <div class="row">

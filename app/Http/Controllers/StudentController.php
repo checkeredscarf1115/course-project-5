@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\__ModelController;
 use App\Models\Student;
+use App\Models\ViewStudent;
 
 class StudentController extends __ModelController
 {
@@ -40,7 +41,7 @@ class StudentController extends __ModelController
     }
 
     public function search(Request $request) {
-        $model = new Student;
+        $model = new ViewStudent;
         return __ModelController::searchWithQuery($model, $request);
     }
 }

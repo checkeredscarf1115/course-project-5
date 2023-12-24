@@ -23,8 +23,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('test', function(User $user) {
-            return preg_match('/test/', $user->name);
+        Gate::define('Admin', function(User $user) {
+            // return preg_match('/test/', $user->name);
+            if ($user->role == 'admin')
+                return true;
+            else return false;
         });
 
 
