@@ -21,10 +21,11 @@ class Admin extends Middleware
         
         // return abort(404);
 
-        if (Auth::user()->role == 'admin') {
+        if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
             return $next($request);
         }
 
-        return abort(404);
+        // return abort(404);
+        return redirect('/');
     }
 }
