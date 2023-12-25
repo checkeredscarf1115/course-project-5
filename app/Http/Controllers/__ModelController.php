@@ -108,8 +108,14 @@ class __ModelController extends Controller
 
     public function insertWithModel($model, Request $request) {
         foreach ($request->all() as $key => $value) {
-            if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
+
+            if ($key == 'ИНН_компании' && $value == "") {
+                return $this->getMessage("Необходимо заполнить все поля перед созданием", "alert-warning");
             }
+
+            else if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
+            }
+            
             else if ($value == "") {
                 return $this->getMessage("Необходимо заполнить все поля перед созданием", "alert-warning");
             }
@@ -117,9 +123,14 @@ class __ModelController extends Controller
 
         // $arr = [];
         foreach ($request->except(['_token', 'submit']) as $key => $value) {
-            if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
+            if ($key == 'ИНН_компании') {
+                $model->$key = $value;
+            }
+
+            else if (array_key_exists('id', $this->data) && array_key_exists($key, $this->data['id'])) {
                 
             }
+             
             else {
             // $arr[$key] = $value;
             $model->$key = $value;

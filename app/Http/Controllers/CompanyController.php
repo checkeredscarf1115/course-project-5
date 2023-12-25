@@ -36,6 +36,11 @@ class CompanyController extends __ModelController
     }
 
     public function insert(Request $request) {
+        
+        // if ($request->ИНН_компании ) {
+        //     return __ModelController::getMessage($request->ИНН_компании, "alert-danger");
+        // }
+
         $model = new Company;
         return __ModelController::changeRecordState($model, $request);
     }
