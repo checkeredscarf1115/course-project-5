@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Client;
 use App\Models\ViewClient;
+use DateTime;
 
 class ClientController extends __ModelController
 {
@@ -51,6 +52,12 @@ class ClientController extends __ModelController
     }
 
     public function insert(Request $request) {
+        $currentDate = new DateTime(date('Y-m-d'));
+        $birthdate = new DateTime($request->дата_рождения);        
+        if ($birthdate->diff($currentDate)->y < 18) {
+            return __ModelController::getMessage("Возраст должен быть не ниже 18 лет", "alert-danger");
+        }
+
         $model = new Client;
         // $model = __ModelController::setConnection($model);
         return __ModelController::changeRecordState($model, $request);

@@ -38,7 +38,7 @@
                 </div>
                 
                 <div class="col-10 bg-light">
-                    <div class="container scrollable " style="max-height: 130vh">     
+                    <div class="container scrollable " style="min-height: 80vh; max-height: 130vh">     
                             @if(isset($data['search_error'])) 
                                 <div class="alert alert-danger">
                                     {{ $data['search_error'] }}
