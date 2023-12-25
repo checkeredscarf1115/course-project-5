@@ -4,7 +4,7 @@
     <input class="w-100" type="date" name="{{ $key }}" value="{{ old($key, date('Y-m-d')) }}" id="{{ $key }}">
 @elseif (preg_match('/образов/', $key))
     <select class="w-100 form-select" name="{{ $key }}" id="{{ $key }}">
-        <option value="основное обшее" @if (old($key) == 'основное обшее') selected="selected" @endif>основное обшее</option>
+        <option value="основное общее" @if (old($key) == 'основное общее') selected="selected" @endif>основное общее</option>
         <option value="среднее общее" @if (old($key) == 'среднее общее') selected="selected" @endif>среднее общее</option>
         <option value="среднее проф" @if (old($key) == 'среднее проф') selected="selected" @endif>среднее проф</option>
         <option value="бакалавриат" @if (old($key) == 'бакалавриат') selected="selected" @endif>бакалавриат</option>
