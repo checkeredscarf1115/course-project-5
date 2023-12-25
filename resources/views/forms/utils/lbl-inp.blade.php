@@ -23,6 +23,22 @@
         <option value="открыта" @if (old($key) == 'открыта') selected="selected" @endif>открыта</option>
         <option value="закрыта" @if (old($key) == 'закрыта') selected="selected" @endif>закрыта</option>
     </select>
+@elseif ($key == 'пол')
+    <select class="w-100 form-select" name="{{ $key }}" id="{{ $key }}">
+        <option value="м" @if (old($key) == 'м') selected="selected" @endif>м</option>
+        <option value="ж" @if (old($key) == 'ж') selected="selected" @endif>ж</option>
+    </select>
+@elseif ($key == 'семейное_положение')
+    <select class="w-100 form-select" name="{{ $key }}" id="{{ $key }}">
+        <option value="холост" @if (old($key) == 'холост') selected="selected" @endif>холост</option>
+        <option value="женат" @if (old($key) == 'женат') selected="selected" @endif>женат</option>
+        <option value="разведён" @if (old($key) == 'разведён') selected="selected" @endif>разведён</option>
+        <option value="вдовец" @if (old($key) == 'вдовец') selected="selected" @endif>вдовец</option>
+        <option value="холоста" @if (old($key) == 'холоста') selected="selected" @endif>холоста</option>
+        <option value="замужем" @if (old($key) == 'замужем') selected="selected" @endif>замужем</option>
+        <option value="разведена" @if (old($key) == 'разведена') selected="selected" @endif>разведена</option>
+        <option value="вдова" @if (old($key) == 'вдова') selected="selected" @endif>вдова</option>
+    </select>    
 @else
     <input class="w-100" type="text" name="{{ $key }}" value="{{ old($key) }}" id="{{ $key }}">
 @endif

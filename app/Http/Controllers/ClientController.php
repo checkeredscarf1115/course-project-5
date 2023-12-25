@@ -58,6 +58,18 @@ class ClientController extends __ModelController
             return __ModelController::getMessage("Возраст должен быть не ниже 18 лет", "alert-danger");
         }
 
+        if ($request->пол == 'ж') {
+            $ms = $request->семейное_положение;
+            if ($ms == 'холост' || $ms == 'женат' || $ms == 'разведён' || $ms == 'вдовец')
+            return __ModelController::getMessage("Семейное положение должно соответствовать полу", "alert-danger");
+        }
+
+        else if ($request->пол == 'м') {
+            $ms = $request->семейное_положение;
+            if ($ms == 'холоста' || $ms == 'замужем' || $ms == 'разведена' || $ms == 'вдова')
+            return __ModelController::getMessage("Семейное положение должно соответствовать полу", "alert-danger");
+        }
+
         $model = new Client;
         // $model = __ModelController::setConnection($model);
         return __ModelController::changeRecordState($model, $request);
