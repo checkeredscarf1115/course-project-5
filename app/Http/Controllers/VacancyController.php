@@ -40,13 +40,15 @@ class VacancyController extends __ModelController
     }
 
     public function insert(Request $request) {
-        $currentDate = date('Y-m-d');
-        if ($request->дата_создания < $currentDate) {
-            return __ModelController::getMessage("Дата создания не может быть ниже текущей", "alert-danger");
-        }
-        
-        if ($request->дата_закрытия <= $request->дата_создания) {
-            return __ModelController::getMessage("Дата закрытия не может быть равна или ниже даты создания", "alert-danger");
+        if (!$request->submit == "delete") {
+            $currentDate = date('Y-m-d');
+            if ($request->дата_создания < $currentDate) {
+                return __ModelController::getMessage("Дата создания не может быть ниже текущей", "alert-danger");
+            }
+            
+            if ($request->дата_закрытия <= $request->дата_создания) {
+                return __ModelController::getMessage("Дата закрытия не может быть равна или ниже даты создания", "alert-danger");
+            }
         }
 
         $model = new Vacancy;
